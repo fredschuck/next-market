@@ -2,4 +2,4 @@
 
 <h3 align="center">🚧 Currently Being Built 🚧 </h3>
 
-This application is expected to be completed by March 18th. 
+<p align="center">This application is expected to be completed by March 18th. </p>
