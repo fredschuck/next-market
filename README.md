@@ -1,4 +1,4 @@
-# Sakura Market
+<h1 align="center">Sakura Market</h1>
 
 <h3 align="center">🚧 Currently Being Built 🚧 </h3>
 
