@@ -30,10 +30,10 @@ const LoginScreen = () => {
     }, [userInfo, navigate, redirect]);
 
     const submitHandler = async (e) => {
+        console.log('submitHandler', email, password);
         e.preventDefault()
         try {
             const res = await login({ email, password }).unwrap();
-            console.log('res', res);
             dispatch(setCredentials(res));
             navigate(redirect);
         } catch (error) {
