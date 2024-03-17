@@ -5,7 +5,6 @@ import User from '../models/userModel.js';
 // Protect routes
 const protect = asyncHandler(async (req, res, next) => {
     let token;
-
     // Read the JWT from the cookie
     token = req.cookies.jwt; // This is the cookie name set in the authUser controller
     if (token) {
