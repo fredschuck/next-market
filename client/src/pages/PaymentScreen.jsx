@@ -21,7 +21,7 @@ const PaymentScreen = () => {
         if (!shippingAddress) {
             navigate('/shipping');
         }
-    }, [shippingAddress, navigate]); // added navigate to the dependency array as dependencies
+    }, [shippingAddress, navigate]);
 
     const submitHandler = (e) => {
         e.preventDefault();
