@@ -8,6 +8,7 @@ import FormContainer from "../../components/FormContainer";
 import {
   useUpdateProductMutation,
   useGetProductDetailsQuery,
+  useUploadProductImageMutation,
 } from "../../slices/productsApiSlice";
 
 const ProductEditScreen = () => {
@@ -30,6 +31,9 @@ const ProductEditScreen = () => {
   const [updateProduct, { isLoading: isLoadingUpdate }] =
     useUpdateProductMutation();
 
+  const [uploadProductImage, { isLoading: loadingUpload }] =
+    useUploadProductImageMutation();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,24 +48,57 @@ const ProductEditScreen = () => {
     }
   }, [product]);
 
+  // const submitHandler = async (e) => {
+  //   e.preventDefault();
+  //   const updatedProduct = {
+  //     id: productId,
+  //     name,
+  //     price,
+  //     image,
+  //     brand,
+  //     category,
+  //     countInStock,
+  //     description,
+  //   };
+  //   const result = await updateProduct(updatedProduct);
+  //   if (result.error) {
+  //     toast.error(result.error);
+  //   } else {
+  //     toast.success("Product updated");
+  //     navigate("/admin/productlist");
+  //   }
+  // };
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    const updatedProduct = {
-      id: productId,
-      name,
-      price,
-      image,
-      brand,
-      category,
-      countInStock,
-      description,
-    };
-    const result = await updateProduct(updatedProduct);
-    if (result.error) {
-      toast.error(result.error);
-    } else {
+    try {
+      await updateProduct({
+        id: productId,
+        name,
+        price,
+        image,
+        brand,
+        category,
+        countInStock,
+        description,
+      }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
       toast.success("Product updated");
+      refetch();
       navigate("/admin/productlist");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
+
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    try {
+      const res = await uploadProductImage(formData).unwrap();
+      toast.success(res.message);
+      setImage(res.path);
+    } catch (error) {
+      toast.error(error?.data?.message || error.error);
     }
   };
 
@@ -99,7 +136,7 @@ const ProductEditScreen = () => {
               />
             </Form.Group>
 
-            {/* <Form.Group controlId="image" className="my-2">
+            <Form.Group controlId="image" className="my-2">
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type="text"
@@ -107,7 +144,13 @@ const ProductEditScreen = () => {
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               />
-            </Form.Group> */}
+              <Form.Control
+                type="file"
+                label="Choose File"
+                onChange={uploadFileHandler}
+              ></Form.Control>
+              {loadingUpload && <Loader />}
+            </Form.Group>
 
             <Form.Group controlId="brand" className="my-2">
               <Form.Label>Brand</Form.Label>
@@ -149,7 +192,11 @@ const ProductEditScreen = () => {
               />
             </Form.Group>
 
-            <Button type="submit" variant="primary">
+            <Button
+              type="submit"
+              variant="primary"
+              style={{ marginTop: "1rem" }}
+            >
               Update
             </Button>
           </Form>
