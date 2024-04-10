@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Rating from "../components/Rating";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import Meta from "../components/Meta";
 import {
   useGetProductDetailsQuery,
   useCreateReviewMutation,
@@ -43,6 +44,12 @@ const ProductScreen = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
 
+  useEffect(() => {
+    return () => {
+      document.title = "Welcome To ProShop";
+    };
+  }, []);
+
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }));
     navigate("/cart");
@@ -67,6 +74,7 @@ const ProductScreen = () => {
 
   return (
     <>
+      <Meta title={product?.name} />
       <Link className="btn btn-light my-3" to="/">
         Go Back
       </Link>
