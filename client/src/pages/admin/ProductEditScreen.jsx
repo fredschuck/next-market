@@ -48,27 +48,6 @@ const ProductEditScreen = () => {
     }
   }, [product]);
 
-  // const submitHandler = async (e) => {
-  //   e.preventDefault();
-  //   const updatedProduct = {
-  //     id: productId,
-  //     name,
-  //     price,
-  //     image,
-  //     brand,
-  //     category,
-  //     countInStock,
-  //     description,
-  //   };
-  //   const result = await updateProduct(updatedProduct);
-  //   if (result.error) {
-  //     toast.error(result.error);
-  //   } else {
-  //     toast.success("Product updated");
-  //     navigate("/admin/productlist");
-  //   }
-  // };
-
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -81,7 +60,7 @@ const ProductEditScreen = () => {
         category,
         countInStock,
         description,
-      }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
+      }).unwrap();
       toast.success("Product updated");
       refetch();
       navigate("/admin/productlist");
