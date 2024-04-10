@@ -10,14 +10,15 @@ import {
   getTopProducts,
 } from "../controllers/productController.js";
 import { protect, isAdmin } from "../middleware/authMiddleware.js";
+import checkObjectId from "../middleware/checkObjectId.js";
 
 router.route("/").get(getProducts).post(protect, isAdmin, createProduct);
+router.route("/:id/reviews").post(protect, checkObjectId, createProductReview);
 router.get("/top", getTopProducts);
 router
   .route("/:id")
-  .get(getProductById)
-  .put(protect, isAdmin, updateProduct)
-  .delete(protect, isAdmin, deleteProduct);
-router.route("/:id/reviews").post(protect, createProductReview);
+  .get(checkObjectId, getProductById)
+  .put(protect, isAdmin, checkObjectId, updateProduct)
+  .delete(protect, isAdmin, checkObjectId, deleteProduct);
 
 export default router;
