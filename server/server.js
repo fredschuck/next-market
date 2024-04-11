@@ -1,5 +1,6 @@
 import path from "path";
 import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 dotenv.config();
@@ -15,13 +16,13 @@ const port = process.env.PORT || 4001;
 
 connectDB();
 
-const cors = require("cors");
-
 const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:4001",
+    origin: "http://localhost:3000", // Allow requests from this origin
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allow these methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
   })
 );
 
