@@ -11,8 +11,7 @@ import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
 
-const host = process.env.HOST || "localhost";
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 5000;
 
 connectDB();
 
