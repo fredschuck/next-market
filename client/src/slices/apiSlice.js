@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../constants";
+import { logout } from "./authSlice";
 
 // NOTE: code here has changed to handle when our JWT and Cookie expire.
 // We need to customize the baseQuery to be able to intercept any 401 responses
