@@ -20,7 +20,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // Allow requests from this origin
+    origin: "http://localhost:4001", // Allow requests from this origin
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allow these methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
   })
