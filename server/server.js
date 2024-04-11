@@ -18,13 +18,7 @@ connectDB();
 
 const app = express();
 
-app.use(
-  cors({
-    origin: "http://localhost:4001", // Allow requests from this origin
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allow these methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
-  })
-);
+app.use(cors());
 
 // Middleware for parsing JSON and URLencoded form data
 app.use(express.json());
