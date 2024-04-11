@@ -15,7 +15,15 @@ const port = process.env.PORT || 4001;
 
 connectDB();
 
+const cors = require("cors");
+
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:4001",
+  })
+);
 
 // Middleware for parsing JSON and URLencoded form data
 app.use(express.json());
