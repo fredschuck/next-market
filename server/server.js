@@ -57,6 +57,6 @@ app.use(errorHandler);
 
 app.listen(port, () =>
   console.log(
-    `Server is running in ${process.env.NODE_ENV} mode at http://${host}:${port}/`
+    `Server is running in ${process.env.NODE_ENV} mode on port ${port}`
   )
 );
