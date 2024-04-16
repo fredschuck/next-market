@@ -4,7 +4,7 @@
 </div>
 
 <div align="center">
-<img src="/client/src/assets/screen.png" width="400" />
+<img src="/client/src/assets/screen.png" width="600" />
 </div>
 
 [Click Here](https://sakuramarket.onrender.com/) to view the website.
